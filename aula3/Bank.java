@@ -100,6 +100,17 @@ public class Bank {
             total += balance(i);
             av[i].l.unlock();
         }
+
+        /* O Professor prefere assim:
+
+        for(int i = 0; i < slots; i++) {
+            av[i].l.lock();
+            total +=balance(i);
+        }
+        for(int i = 0; i < slots; i++)
+            av[i].l.unlock();
+        */
+
         return total;
     }
 }
