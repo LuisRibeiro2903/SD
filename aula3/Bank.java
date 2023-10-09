@@ -83,10 +83,15 @@ public class Bank {
             t.l.lock();
             f.l.lock();
         }
-        try{
-            return (withdraw(from, value) && deposit(to, value));
+        try {
+            try {
+                if (!withdraw(from, value))
+                    return false;
+            } finally {
+                f.l.unlock();
+            }
+            return deposit(to, value);
         } finally {
-            f.l.unlock();
             t.l.unlock();
         }
         
